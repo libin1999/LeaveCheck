@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 该xml需根据需求经常改动 -->
+<struts>
+	
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 用户登录和退出部分的action -->
+    	<action name="jugelogin" class="com.sasu.control.Login" method="login">
+    		<result name="student" type="chain">leaveday</result>
+    		<result name="success">/index.jsp</result>
+    		<result name="false">/login.jsp</result>
+    	</action>
+    	<action name="exit" class="com.sasu.control.Login" method="exit">
+    		<result name="success" type="redirect">/login.jsp</result>
+    	</action>
+    	<!-- 学生角色的action -->
+    	<action name="leaveday" class="com.sasu.control.StudnetAction" method="leaveday">
+    		<result name="success">/WEB-INF/student/leaveday.jsp</result>
+    		<result name="false">/WEB-INF/student/studentdefault.jsp</result>
+    	</action>
+    	
+    	<!-- 对某些的增删改查的操作 -->
+    	<!-- 对college的增删改查 -->
+    	<action name="college-list" class="com.sasu.control.CollegeAction" method="list">
+    		<result name="list">/pages/college-list.jsp</result>
+    	</action>
+    	
+    	<action name="college-update" class="com.sasu.control.CollegeAction" method="update">
+    		<result name="update">/pages/college-update.jsp</result>
+    	</action>
+    	
+    	<action name="do-college-update" class="com.sasu.control.CollegeAction" method="doUpdate">
+    		<result name="do-update">college-list</result>
+    		<result name="fail-update" type="redirect">college-list</result>
+    	</action>
+    	
+    	<action name="do-college-delete" class="com.sasu.control.CollegeAction" method="doDelete">
+    		<result name="do-delete" type="redirect">college-list</result>
+    		<result name="fail-delete" type="redirect">college-list</result>
+    	</action>
+    	
+    	<action name="college-add" class="com.sasu.control.CollegeAction" method="add">
+    		<result name="add">/pages/college-add.jsp</result>
+    	</action>
+    	
+    	<action name="do-college-add" class="com.sasu.control.CollegeAction" method="doAdd">
+    		<result name="do-add" type="redirect">college-list</result>
+    		<result name="fail-add" type="redirect">college-list</result>
+    	</action>
+    	
+    	<!-- 这是对course的操作 -->
+    	<action name="course-list" class="com.sasu.control.CourseAction" method="list">
+    		<result name="list">/pages/course-list.jsp</result>
+    	</action>
+    	<action name="course-add" class="com.sasu.control.CourseAction" method="add">
+    		<result name="add">/pages/course-add.jsp</result>
+    	</action>
+    	<action name="do-course-add" class="com.sasu.control.CourseAction" method="doAdd">
+    		<result name="do-add">course-list</result>
+    		<result name="fail-add" type="redirect">course-list</result>
+    	</action>
+    	
+    	<action name="course-update" class="com.sasu.control.CourseAction" method="update">
+    		<result name="update">/pages/course-update.jsp</result>
+    	</action>
+    	
+    	<action name="do-course-update" class="com.sasu.control.CourseAction" method="doUpdate">
+    		<result name="do-update" type="redirect">course-list</result>
+    		<result name="fail-update" type="redirect">course-list</result>
+    	</action>
+    	
+    	<action name="do-course-delete" class="com.sasu.control.CourseAction" method="doDelete">
+    		<result name="do-delete" type="redirect">course-list</result>
+    		<result name="fail-delete" type="redirect">course-list</result>
+    	</action>
+    	<!-- 这是对lesson的操作 -->
+    	<action name="lesson-list" class="com.sasu.control.LessonAction" method="list">
+    		<result name="list">/pages/lesson-list.jsp</result>
+    	</action>
+    	
+    	<action name="lesson-add" class="com.sasu.control.LessonAction" method="add">
+    		<result name="add">/pages/lesson-add.jsp</result>
+    	</action>
+    	
+    </package>
+    
+</struts>
